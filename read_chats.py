@@ -40,7 +40,7 @@ def unexpected_error():
             }
         ]
     }
-    error_notice_webhook_url = "https://discord.com/api/webhooks/715706908966780938/qyuvCMD4-xMY5gAp8YSe7iraJNGL2ctxY0Rqlr8_mC4yRELn2EdziqBYbX9y3oujmAkN"
+    error_notice_webhook_url = os.getenv("error_notice_webhook")
     requests.post(error_notice_webhook_url, json.dumps(error_content), headers={"Content-Type": "application/json"}) #エラーメッセをウェブフックに投稿
 
 
