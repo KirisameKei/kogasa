@@ -173,10 +173,14 @@ async def on_message(message):
 
             with open("msg_dictionary.json", mode="r", encoding="utf-8") as f:
                 guild_msg_dict = json.load(f)
-            msg_dict = guild_msg_dict[f"{message.guild.id}"]
-            for tango in msg_dict.keys():
-                if tango in msg:
-                    msg = msg.replace(tango, msg_dict[tango])
+            try:
+                msg_dict = guild_msg_dict[f"{message.guild.id}"]
+            except KeyError:
+                pass
+            else:
+                for tango in msg_dict.keys():
+                    if tango in msg:
+                        msg = msg.replace(tango, msg_dict[tango])
 
             if len(msg) > 35:
                 msg = msg[0:35] + "以下略"
