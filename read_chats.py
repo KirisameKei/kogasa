@@ -158,19 +158,6 @@ async def on_message(message):
             if "http" in msg:
                 return
 
-            if "\n" in msg:
-                msg = msg.replace("\n","")
-            if "w" in msg:
-                msg = msg.replace("w","わら")
-            if "ｗ" in msg:
-                msg = msg.replace("ｗ","わら")
-
-            with open("msg_dictionary_global.json", mode="r", encoding="utf-8") as f:
-                msg_dict = json.load(f)
-            for tango in msg_dict.keys():
-                if tango in msg:
-                    msg = msg.replace(tango, msg_dict[tango])
-
             with open("msg_dictionary.json", mode="r", encoding="utf-8") as f:
                 guild_msg_dict = json.load(f)
             try:
@@ -182,11 +169,24 @@ async def on_message(message):
                     if tango in msg:
                         msg = msg.replace(tango, msg_dict[tango])
 
+            with open("msg_dictionary_global.json", mode="r", encoding="utf-8") as f:
+                msg_dict = json.load(f)
+            for tango in msg_dict.keys():
+                if tango in msg:
+                    msg = msg.replace(tango, msg_dict[tango])
+
             if len(msg) > 35:
                 msg = msg[0:35] + "以下略"
 
             with open("voice.json", mode="r", encoding="utf-8") as f:
                 voice_dict = json.load(f)
+
+            if "\n" in msg:
+                msg = msg.replace("\n","")
+            if "w" in msg:
+                msg = msg.replace("w","わら")
+            if "ｗ" in msg:
+                msg = msg.replace("ｗ","わら")
 
             try:
                 user_setting = voice_dict[f"{message.author.id}"]
