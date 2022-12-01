@@ -1,0 +1,21 @@
+on:
+  push:
+    branches:
+      - master
+name: Deploy
+jobs:
+  deploy:
+    runs-on: ubuntu-20.04
+    steps:
+    - name: Install Passwd
+      uses: shimataro/ssh-key-action@v1
+      with: # shimataro/ssh-key-actionに渡すパラメーター
+        private-key: ${{ secrets.SSH_KEY }} # 必須
+        known-hosts: ${{ secrets.KNOWN_HOSTS }} # 省略可
+    - name: run deploy script
+      env:
+        port: ${{ secrets.PORT }}
+        host: ${{ secrets.HOST }}
+        owner:  ${{ secrets.OWNER }}
+      run:
+        ssh -i ~/.ssh/authorized_keys -p ${port} ${owner}@${host} "cd /home/${owner}/kogasa && git pull origin master && sudo python3 version_up.py"
