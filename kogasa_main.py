@@ -117,6 +117,10 @@ async def on_message(message):
             (message.clean_content.startswith("/*") and message.clean_content.endswith("*/")):
             return
 
+        if message.content.startswith("$help"): #カスタムプレフィックスを忘れた人の救済用
+            await commands.help(message, client2)
+            return #コマンド系は音声読み上げの方に流さない
+
         command = None
         if message.guild is not None:
             with open("./datas/custom_prefix.json", mode="r", encoding="utf-8") as f:
@@ -180,10 +184,6 @@ async def on_message(message):
             elif command.startswith("leave_guild "):
                 await commands.leave_guild(message, client2, command)
 
-            return #コマンド系は音声読み上げの方に流さない
-
-        if message.content.startswith("$help"): #カスタムプレフィックスを忘れた人の救済用
-            await commands.help(message, client2)
             return #コマンド系は音声読み上げの方に流さない
 
         if not is_client2_in_vc:
@@ -401,7 +401,7 @@ async def play_voice(client2):
                         f.write(message_list[0][2])
 
                     if os.path.isdir("/var/lib/mecab/dic/open-jtalk/naist-jdic"):
-                        cmd = f"open_jtalk -x /var/lib/mecab/dic/open-jtalk/naist-jdic {message_list[0][1]} -ow output.wav input.txt"
+                        cmd = f"/usr/bin/open_jtalk -x /var/lib/mecab/dic/open-jtalk/naist-jdic {message_list[0][1]} -ow output.wav input.txt"
                     else:
                         cmd = f"open_jtalk -x C:\\open_jtalk\\bin\\dic {message_list[0][1]} -ow output.wav input.txt"
                         print(cmd)
