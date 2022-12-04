@@ -3,7 +3,13 @@ import datetime
 import json
 import os
 import subprocess
+import sys
 import traceback
+
+if os.path.isdir("C:\\Users\\hayab\\AppData\\Roaming\\Python\\Python38\\discordv2"): #ローカルなら
+    sys.path.append("C:\\Users\\hayab\\AppData\\Roaming\\Python\\Python38\\discordv2")
+else:
+    sys.path.append("/home/kirisamekei/discordv1")
 
 import discord
 import jaconv
