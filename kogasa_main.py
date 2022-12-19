@@ -269,7 +269,7 @@ async def on_message(message):
                 high = "0.0"
 
         if os.path.isfile("/home/kirisamekei/kogasa/voices/mei_normal.htsvoice"): #リモートなら
-            cmd = f"-m /home/kirisamekei/read/voices/{voice} -r {speed} -fm {high}"
+            cmd = f"-m /home/kirisamekei/kogasa/voices/{voice} -r {speed} -fm {high}"
         else: #ローカルなら
             cmd = f"-m C:\\Users\\hayab\\OneDrive\\bots_and_python\\discord\\client bot\\kogasa\\voices\\{voice} -r {speed} -fm {high}"
 
