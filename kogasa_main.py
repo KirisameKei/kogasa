@@ -268,10 +268,10 @@ async def on_message(message):
             except KeyError:
                 high = "0.0"
 
-        if os.path.isfile("/home/kirisamekei/read/voices/mei_normal.htsvoice"): #リモートなら
+        if os.path.isfile("/home/kirisamekei/kogasa/voices/mei_normal.htsvoice"): #リモートなら
             cmd = f"-m /home/kirisamekei/read/voices/{voice} -r {speed} -fm {high}"
         else: #ローカルなら
-            cmd = f"-m C:\\Users\\hayab\\OneDrive\\bots_and_python\\discord\\client bot\\new-kogasa\\voices\\{voice} -r {speed} -fm {high}"
+            cmd = f"-m C:\\Users\\hayab\\OneDrive\\bots_and_python\\discord\\client bot\\kogasa\\voices\\{voice} -r {speed} -fm {high}"
 
         global message_list
         message_list.append(
