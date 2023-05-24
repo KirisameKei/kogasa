@@ -3,13 +3,7 @@ import datetime
 import json
 import os
 import subprocess
-import sys
 import traceback
-
-if os.path.isdir("C:\\Users\\hayab\\AppData\\Roaming\\Python\\Python38\\discordv2"): #ローカルなら
-    sys.path.append("C:\\Users\\hayab\\AppData\\Roaming\\Python\\Python38\\discordv2")
-else:
-    sys.path.append("/home/kirisamekei/discordv1")
 
 import discord
 import jaconv
@@ -311,7 +305,7 @@ async def on_guild_join(guild):
             )
             self_introduction_embed = discord.Embed(title="よろしくお願いします！", description=description, color=0x00ffff)
             kei = client2.get_user(523303776120209408)
-            self_introduction_embed.set_footer(text="←KirisameKei(作者)", icon_url=kei.avatar_url_as(format="png"))
+            self_introduction_embed.set_footer(text="←KirisameKei(作者)", icon_url=kei.avatar.url)
 
             try:
                 await ch.send(embed=self_introduction_embed)
@@ -324,8 +318,8 @@ async def on_guild_join(guild):
             description=f"{client2.user.name}が{guild.name}に参加しました",
             color=0xfffffe
         )
-        guild_join_embed.set_author(name=client2.user.name,icon_url=client2.user.avatar_url_as(format="png"))
-        guild_join_embed.set_footer(text=guild.name, icon_url=guild.icon_url_as(format="png"))
+        guild_join_embed.set_author(name=client2.user.name,icon_url=client2.user.avatar.url)
+        guild_join_embed.set_footer(text=guild.name, icon_url=guild.icon.url)
         join_leave_notice_ch = client2.get_channel(709307324170240079)
         await join_leave_notice_ch.send(embed=guild_join_embed)
 
@@ -341,8 +335,8 @@ async def on_guild_remove(guild):
             description=f"{client2.user.name}が{guild.name}から退出しました",
             color=0xff0000
         )
-        guild_remove_embed.set_author(name=client2.user.name, icon_url=client2.user.avatar_url_as(format="png"))
-        guild_remove_embed.set_footer(text=guild.name, icon_url=guild.icon_url_as(format="png"))
+        guild_remove_embed.set_author(name=client2.user.name, icon_url=client2.user.avatar.url)
+        guild_remove_embed.set_footer(text=guild.name, icon_url=guild.icon.url)
         join_leave_notice_ch = client2.get_channel(709307324170240079)
         await join_leave_notice_ch.send(embed=guild_remove_embed)
 
@@ -411,7 +405,6 @@ async def play_voice(client2):
                         cmd = f"/usr/bin/open_jtalk -x /var/lib/mecab/dic/open-jtalk/naist-jdic {message_list[0][1]} -ow output.wav input.txt"
                     else:
                         cmd = f"open_jtalk -x C:\\open_jtalk\\bin\\dic {message_list[0][1]} -ow output.wav input.txt"
-                        print(cmd)
 
                     subprocess.run(cmd, shell=True)
                 except UnicodeEncodeError:

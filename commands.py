@@ -358,8 +358,8 @@ async def leave_guild(message, client2, command):
         description="はい(離脱&ブラックリスト登録): 👍\nはい(離脱のみ): 👋\nいいえ(ミス): 👎",
         color=0xff0000
     )
-    embed.set_author(name=guild.name, icon_url=guild.icon_url_as(format="png"))
-    embed.set_footer(text=guild.owner.name, icon_url=guild.owner.avatar_url_as(format="png"))
+    embed.set_author(name=guild.name, icon_url=guild.icon.url)
+    embed.set_footer(text=guild.owner.name, icon_url=guild.owner.avatar.url)
     msg = await message.channel.send(embed=embed)
     await msg.add_reaction("👍")
     await msg.add_reaction("👋")
