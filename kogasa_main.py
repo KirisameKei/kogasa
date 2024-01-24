@@ -400,8 +400,8 @@ async def play_voice(client2):
                     with open("input.txt", mode="w", encoding="utf-8") as f:
                         f.write(message_list[0][2])
 
-                    if os.path.isdir("/var/lib/mecab/dic/open-jtalk/naist-jdic"):
-                        cmd = f"/usr/bin/open_jtalk -x /var/lib/mecab/dic/open-jtalk/naist-jdic {message_list[0][1]} -ow output.wav input.txt"
+                    if os.path.isfile("/usr/bin/open_jtalk"):
+                        cmd = f"/usr/bin/open_jtalk -x /var/lib/mecab/dic/ipadic-utf8 {message_list[0][1]} -ow output.wav input.txt"
                     else:
                         cmd = f"open_jtalk -x C:\\open_jtalk\\bin\\dic {message_list[0][1]} -ow output.wav input.txt"
 
